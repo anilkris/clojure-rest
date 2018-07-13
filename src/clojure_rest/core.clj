@@ -1,7 +1,12 @@
 (ns clojure-rest.core
-  (:gen-class))
+(:use compojure.core)
+(:require [compojure.handler :as handler]
+          [compojure.route :as route]))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defroutes app-routes
+  (GET "/" [] "Hello World")
+  (route/not-found "Not Found"))
+
+(def app
+  (handler/site app-routes))
+
